@@ -18,7 +18,7 @@ export const checkForUser = async(username) =>{
 export const createUser = async(username) =>{
     try{
         const response = await fetch(apiUrl, {
-            method: 'POST',
+            method: 'POST', // Create a resource
             headers: createHeaders(),
             body: JSON.stringify({
                 username,
