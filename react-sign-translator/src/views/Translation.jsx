@@ -1,24 +1,25 @@
-import { useState } from "react-hook-form"
 import TranslationInput from "../components/Translation/TranslationInput"
 import TranslationOutput from "../components/Translation/TranslationOutput"
 import withAuth from "../hoc/WithAuth"
-
+import { useState } from "react"
+import { createTranslation } from "../api/translate"
+import { UseUser } from "../context/UserContext"
+import { storageSave } from "../utils/storage"
+import { STORAGE_KEY_USER } from "../const/storageKeys"
 
 const Translation = () =>{
+    const { user, setUser } = UseUser();
     var imagetranslate = []
-    //const [inputText, setInputText] = useState()
+    const [inputText, setInputText] = useState()
     const handleTranslate = (text) =>{
-        //Sjekk tekst lengde
-        //Sett text i state?
-        //bruk API handler lagd (translate.js)
-        //save i locale storage
-        //Oppdater context state (useUser)
-        //Split text
-        //Finn path
-        //Print bilder i return i views, ikke output
+        setInputText(inputText);
+        const [updatedUser] = createTranslation(user, text);
 
-        /*
-        console.log(text)*/
+		console.log("Result ", updatedUser);
+		storageSave(STORAGE_KEY_USER, updatedUser);
+		setUser(updatedUser);
+
+
         imagetranslate = []
         for (const c of text) {imagetranslate.push(c)}
         
