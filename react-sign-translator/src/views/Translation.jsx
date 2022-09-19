@@ -20,15 +20,18 @@ const Translation = () =>{
         console.log("updated user: " + updatedUser) //updated user er null whyyy
         console.log(user)
         
-       
-        storageSave(STORAGE_KEY_USER, updatedUser);
+        //if(updatedUser !== null){}
+            storageSave(STORAGE_KEY_USER, updatedUser);
 		    setUser(updatedUser);
         
+        
 
-        imagetranslate = []
-        for (const c of text) {imagetranslate.push(c)}
+
+
         
     }
+    imagetranslate = []
+    for (const c of inputText) {imagetranslate.push(c)}
 
     return(
         <>
@@ -38,7 +41,7 @@ const Translation = () =>{
             <h3 className="translation_txt">Text to Sign Language:</h3>
 			{/* printe bilder her */}
             {imagetranslate.map(c => (<TranslationOutput data={c} />))}
-            {/* <TranslationOutput data={"a"} /> */}
+            {}
 
         </>
     )
