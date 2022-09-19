@@ -16,13 +16,28 @@ const ProfileActions = () => {
         }
     }
 
+    const handleClearHistoryClick = async() =>{
+        if(!window.confirm("Are your sure?")){
+            return
+        }
+        const [clearError] = await clearTranslation(user.id)
+        if(clearError!==null){
+            return
+        }
+        const updatedUser = {
+            ...user,
+            translations: []
+        }
+        storageSave(STORAGE_KEY_USER,updatedUser)
+        setUser(updatedUser)
+    }
+
 
     return(
-        <ul>
-            <li><Link to="/translation">Translate</Link></li>
-            <li><button>Clear history</button></li>
-            <li><button onClick={handleLogoutClick}>Logout</button></li>
-        </ul>
+        <>
+            <button onClick={handleClearHistoryClick}>Clear history</button>
+            <button onClick={handleLogoutClick}>Logout</button>
+        </>
     )
 }
 export default ProfileActions

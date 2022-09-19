@@ -21,13 +21,13 @@ export const createTranslation = async (user, translation) =>{
     }
 }
 
-export const clearTranslation = async (user) =>{
+export const clearTranslation = async (userId) =>{
     try{
-        const response = await fetch(`${apiUrl}/${user.id}`, {
-            method: 'DELETE', 
+        const response = await fetch(`${apiUrl}/${userId}`, {
+            method: 'PATCH', 
             headers: createHeaders(),
             body: JSON.stringify({
-                translations: [...user.translation]
+                translations: []
             })
         })
         if(!response.ok){
