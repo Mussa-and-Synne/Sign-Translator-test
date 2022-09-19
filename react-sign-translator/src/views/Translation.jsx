@@ -33,7 +33,7 @@ const Translation = () =>{
 
     imageTranslate = []
         for (const c in inputText) {
-            imageTranslate.push(inputText[c].replace(/[^a-zA-Z]/g,""))     
+            imageTranslate.push(inputText[c].replace(/[^a-zA-Z\s]/g,""))     
         }
         console.log(imageTranslate)
 
@@ -44,7 +44,7 @@ const Translation = () =>{
                 <TranslationInput onTranslation={handleTranslate}/>
             </section>
             <h3 className="translation_txt">Text to Sign Language:</h3>
-            {imageTranslate.map((c, index) => (<TranslationOutput key={index} data={c} />))}
+            {imageTranslate.map((c, index) => c == " " ? <h1>Huge Space</h1>: (<TranslationOutput key={index} data={c} />))}
         </>
     )
 }
