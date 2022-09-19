@@ -7,7 +7,7 @@ app.use(requireHTTPS);
 app.use(express.static('./build/' + packageJson.name));
 
 // Redirect app request to build/index.html!
-app.get('/react-sign-translator', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile('index.html', {root: 'build/' + packageJson.name});
 });
 
