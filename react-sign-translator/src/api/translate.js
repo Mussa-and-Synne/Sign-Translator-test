@@ -4,7 +4,7 @@ const apiUrl = process.env.REACT_APP_API_URL
 export const createTranslation = async (user, translation) =>{
     try{
         const response = await fetch(`${apiUrl}/${user.id}`, {
-            method: 'PATCH', // Create a resource
+            method: 'PATCH', 
             headers: createHeaders(),
             body: JSON.stringify({
                 translations: [...user.translations, translation]
@@ -14,7 +14,26 @@ export const createTranslation = async (user, translation) =>{
             throw new Error('Could not update translations')
         }
         const data = await response.json()
-        console.log("data: " + data)
+        return [ null, data ]
+    }
+    catch(error){
+        return [error.message, null ]
+    }
+}
+
+export const clearTranslation = async (user) =>{
+    try{
+        const response = await fetch(`${apiUrl}/${user.id}`, {
+            method: 'DELETE', 
+            headers: createHeaders(),
+            body: JSON.stringify({
+                translations: [...user.translation]
+            })
+        })
+        if(!response.ok){
+            throw new Error('Could not delete translations')
+        }
+        const data = await response.json()
         return [ null, data ]
     }
     catch(error){
