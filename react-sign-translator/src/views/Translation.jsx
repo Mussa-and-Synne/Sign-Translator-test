@@ -8,17 +8,22 @@ import { storageSave } from "../utils/storage"
 import { STORAGE_KEY_USER } from "../const/storageKeys"
 
 const Translation = () =>{
+
     const { user, setUser } = UseUser();
     var imagetranslate = []
     const [inputText, setInputText] = useState()
-    const handleTranslate = (text) =>{
-        setInputText(inputText);
-        const [updatedUser] = createTranslation(user, text);
 
-		console.log("Result ", updatedUser);
-		storageSave(STORAGE_KEY_USER, updatedUser);
-		setUser(updatedUser);
-
+    const handleTranslate = async (text) =>{
+        setInputText(text);
+        const [error,updatedUser] = await createTranslation(user, text);
+        console.log(error)
+        console.log("updated user: " + updatedUser) //updated user er null whyyy
+        console.log(user)
+        
+       
+        storageSave(STORAGE_KEY_USER, updatedUser);
+		    setUser(updatedUser);
+        
 
         imagetranslate = []
         for (const c of text) {imagetranslate.push(c)}
@@ -33,7 +38,7 @@ const Translation = () =>{
             <h3 className="translation_txt">Text to Sign Language:</h3>
 			{/* printe bilder her */}
             {imagetranslate.map(c => (<TranslationOutput data={c} />))}
-            <TranslationOutput data={"a"} />
+            {/* <TranslationOutput data={"a"} /> */}
 
         </>
     )
